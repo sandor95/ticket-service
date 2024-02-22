@@ -1,0 +1,32 @@
+name: Ticket Service CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Compile
+        run: mvn -B clean compile
+
+      - name: Unit test
+        run: mvn -B test
+
+      - name: Integration test
+        run: mvn -B verify -Dskip.unit.test=true
+
+      - name: Integration test
+        run: mvn -B pitest:mutationCoverage
