@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.otp</groupId>
+    <artifactId>ticket-service</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <organization>
+        <name>OTP Mobil Kft.</name>
+    </organization>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.2</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <repo.java.version>17</repo.java.version>
+        <repo.encoding>UTF-8</repo.encoding>
+        <maven.compiler.source>${repo.java.version}</maven.compiler.source>
+        <maven.compiler.target>${repo.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${repo.encoding}</project.build.sourceEncoding>
+
+        <skip.unit.test>false</skip.unit.test>
+        <skip.integration.test>false</skip.integration.test>
+
+        <reports.directory>${project.build.directory}/reports</reports.directory>
+
+        <spring.boot.version>3.2.2</spring.boot.version>
+
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <mockito.version>5.10.0</mockito.version>
+        <jacoco.version>0.8.10</jacoco.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- Spring Boot START -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <!-- Spring Boot END -->
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+        </dependency>
+
+        <!-- Apache StringUtils -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+
+
+        <!-- Test dependencies START -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Test dependencies END -->
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <!-- Enforcer plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <dependencyConvergence/>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Checkstyle plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <inputEncoding>${repo.encoding}</inputEncoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Surefire plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skip>${skip.unit.test}</skip>
+                    <!-- Do NOT run integration tests -->
+                    <excludes>**/*IT.java</excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Failsafe plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Run ONLY integration tests -->
+                            <includes>**/*IT.java</includes>
+                            <skip>${skip.integration.test}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven jar plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Created-By>${project.organization.name}</Created-By>
+                            <Application-Name>OTP Mobil Ticket Service</Application-Name>
+                            <Application-Version>${project.version}</Application-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Release plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
+
+
+            <!-- TESZT PLUGINEK START -->
+
+
+            <!-- JaCoCo plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>check</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.97</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.97</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectory>${reports.directory}/jacoco</outputDirectory>
+                    <title>Ticket Service's JaCoCo report</title>
+                    <includes>
+                        <include>hu/otp/ticket/service/**</include>
+                    </includes>
+                    <excludes>
+                        <param>hu/otp/ticket/service/**/*Application*</param>
+                        <param>hu/otp/ticket/service/**/*Configuration*</param>
+                        <param>hu/otp/ticket/service/**/*Const*</param>
+                        <param>hu/otp/ticket/service/**/*Controller*</param>
+                        <param>hu/otp/ticket/service/**/*Exception*</param>
+                        <param>hu/otp/ticket/service/**/*Mock*</param>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Pitest plugin -->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.15.0</version>
+                <configuration>
+                    <targetClasses>
+                        <param>hu.otp.ticket.service.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>hu.otp.ticket.service.*</param>
+                    </targetTests>
+                    <reportsDirectory>${reports.directory}/pitest</reportsDirectory>
+                    <avoidCallsTo>
+                        <avoidCallsTo>java.util.logging</avoidCallsTo>
+                        <avoidCallsTo>org.apache.log4j</avoidCallsTo>
+                        <avoidCallsTo>org.slf4j</avoidCallsTo>
+                        <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
+                    </avoidCallsTo>
+                    <excludedClasses>
+                        <excludedClass>hu.otp.ticket.service.**.*Application</excludedClass>
+                        <excludedClass>hu.otp.ticket.service.**.*Configuration</excludedClass>
+                        <excludedClass>hu.otp.ticket.service.**.*Const</excludedClass>
+                        <excludedClass>hu.otp.ticket.service.**.*Controller</excludedClass>
+                        <excludedClass>hu.otp.ticket.service.**.*Exception</excludedClass>
+                        <excludedClass>hu.otp.ticket.service.**.*Mock</excludedClass>
+                    </excludedClasses>
+                    <mutationThreshold>97</mutationThreshold>
+                    <timestampedReports>false</timestampedReports>
+                    <outputFormats>
+                        <value>XML</value>
+                        <value>HTML</value>
+                    </outputFormats>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.2.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <scm>
+        <connection>scm:git:ssh://git@github.com:7999/snappycodingteam/lottery-engine.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:7999/snappycodingteam/lottery-engine.git</developerConnection>
+        <url>scm:git:ssh://git@github.com:7999/snappycodingteam/lottery-engine.git</url>
+        <tag>lottery-engine-0.0.1</tag>
+    </scm>
+
+</project>
