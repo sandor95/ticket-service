@@ -4,13 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.otp</groupId>
+    <groupId>hu.otp</groupId>
     <artifactId>ticket-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <organization>
         <name>OTP Mobil Kft.</name>
     </organization>
+
+    <modules>
+        <module>docs</module>
+        <module>app</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -40,49 +46,6 @@
         <mockito.version>5.10.0</mockito.version>
         <jacoco.version>0.8.10</jacoco.version>
     </properties>
-
-    <dependencies>
-
-        <!-- Spring Boot START -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <!-- Spring Boot END -->
-
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-        </dependency>
-
-        <!-- Apache StringUtils -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.14.0</version>
-        </dependency>
-
-
-        <!-- Test dependencies START -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Test dependencies END -->
-
-    </dependencies>
 
     <build>
 

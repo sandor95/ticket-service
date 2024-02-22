@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: CORE-API
+
+#  rabbitmq:
+#    host: ${MQ_HOST:localhost}
+#    username: ${MQ_USERNAME:api_service}
+#    password: ${MQ_PASSWORD:api_service_123}
+#    stream:
+#      name: ${MQ_QUEUE_NAME:JOURNAL}
+
+#  datasource:
+#    url: ${DATABASE_CONNECTION_URL:jdbc:mysql://localhost:3306/SERVICE_DEV}
+#    username: ${DATABASE_USERNAME:SERVICE}
+#    password: ${DATABASE_PASSWORD:SERVICE_123}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+springdoc:
+  swagger-ui:
+    display-operation-id: true
+    syntax-highlight:
+      activated: true
+      theme: "agate"

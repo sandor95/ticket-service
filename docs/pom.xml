@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>hu.otp</groupId>
+        <artifactId>ticket-service</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>hu.otp.ticket.service</groupId>
+    <artifactId>docs</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Ticket Service documentation</name>
+
+    <properties>
+        <targetDocsFolder>${project.build.directory}/docs</targetDocsFolder>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>specification</directory>
+                <excludes>
+                    <exclude>*.docx</exclude>
+                </excludes>
+                <targetPath>${targetDocsFolder}/specification</targetPath>
+            </resource>
+            <resource>
+                <directory>architecture</directory>
+                <targetPath>${targetDocsFolder}/architecture</targetPath>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <sourceDirectory>specification</sourceDirectory>
+                    <sourceDocumentExtensions>adoc</sourceDocumentExtensions>
+                    <outputDirectory>${targetDocsFolder}/specification</outputDirectory>
+                    <backend>html5</backend>
+                    <doctype>docbook</doctype>
+                    <preserveDirectories>true</preserveDirectories>
+                    <relativeBaseDir>true</relativeBaseDir>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>generate-docs-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- JaCoCo plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Pitest plugin -->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

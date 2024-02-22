@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" debug="true" >
+
+    <property name="TIMESTAMP" value="%d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Budapest}" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${TIMESTAMP} [%thread] %level %logger.%method:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="hu.otp" level="DEBUG" />
+
+    <root level="OFF">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
