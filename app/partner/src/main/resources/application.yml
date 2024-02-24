@@ -1,0 +1,24 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: PARTNER
+  datasource:
+    url: ${DATABASE_CONNECTION_URL:jdbc:mysql://localhost:3306/PARTNER}
+    username: ${DATABASE_USERNAME:PARTNER}
+    password: ${DATABASE_PASSWORD:PARTNER_123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+springdoc:
+  swagger-ui:
+    display-operation-id: true
+    syntax-highlight:
+      activated: true
+      theme: "agate"

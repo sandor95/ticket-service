@@ -16,6 +16,7 @@
     <modules>
         <module>docs</module>
         <module>app</module>
+        <module>lib</module>
     </modules>
 
     <parent>
@@ -46,6 +47,25 @@
         <mockito.version>5.10.0</mockito.version>
         <jacoco.version>0.8.10</jacoco.version>
     </properties>
+
+    <dependencies>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+        </dependency>
+
+        <!-- JUnit launcher because IDEA can not run test without this dependency -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
 
@@ -204,15 +224,17 @@
                     <outputDirectory>${reports.directory}/jacoco</outputDirectory>
                     <title>Ticket Service's JaCoCo report</title>
                     <includes>
-                        <include>hu/otp/ticket/service/**</include>
+                        <include>hu/otp/**</include>
                     </includes>
                     <excludes>
-                        <param>hu/otp/ticket/service/**/*Application*</param>
-                        <param>hu/otp/ticket/service/**/*Configuration*</param>
-                        <param>hu/otp/ticket/service/**/*Const*</param>
-                        <param>hu/otp/ticket/service/**/*Controller*</param>
-                        <param>hu/otp/ticket/service/**/*Exception*</param>
-                        <param>hu/otp/ticket/service/**/*Mock*</param>
+                        <param>hu/otp/**/*Application*</param>
+                        <param>hu/otp/**/*Configuration*</param>
+                        <param>hu/otp/**/*Const*</param>
+                        <param>hu/otp/**/*Controller*</param>
+                        <param>hu/otp/**/*Exception*</param>
+                        <param>hu/otp/**/*Gateway*</param>
+                        <param>hu/otp/**/*Mock*</param>
+                        <param>hu/otp/**/model/**</param>
                     </excludes>
                 </configuration>
             </plugin>
@@ -224,10 +246,10 @@
                 <version>1.15.0</version>
                 <configuration>
                     <targetClasses>
-                        <param>hu.otp.ticket.service.*</param>
+                        <param>hu.otp.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>hu.otp.ticket.service.*</param>
+                        <param>hu.otp.*</param>
                     </targetTests>
                     <reportsDirectory>${reports.directory}/pitest</reportsDirectory>
                     <avoidCallsTo>
@@ -237,12 +259,14 @@
                         <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
                     </avoidCallsTo>
                     <excludedClasses>
-                        <excludedClass>hu.otp.ticket.service.**.*Application</excludedClass>
-                        <excludedClass>hu.otp.ticket.service.**.*Configuration</excludedClass>
-                        <excludedClass>hu.otp.ticket.service.**.*Const</excludedClass>
-                        <excludedClass>hu.otp.ticket.service.**.*Controller</excludedClass>
-                        <excludedClass>hu.otp.ticket.service.**.*Exception</excludedClass>
-                        <excludedClass>hu.otp.ticket.service.**.*Mock</excludedClass>
+                        <excludedClass>hu.otp.**.*Application</excludedClass>
+                        <excludedClass>hu.otp.**.*Configuration</excludedClass>
+                        <excludedClass>hu.otp.**.*Const</excludedClass>
+                        <excludedClass>hu.otp.**.*Controller</excludedClass>
+                        <excludedClass>hu.otp.**.*Exception</excludedClass>
+                        <excludedClass>hu.otp.**.*Gateway</excludedClass>
+                        <excludedClass>hu.otp.**.*Mock</excludedClass>
+                        <excludedClass>hu.otp.**.model.*</excludedClass>
                     </excludedClasses>
                     <mutationThreshold>97</mutationThreshold>
                     <timestampedReports>false</timestampedReports>
