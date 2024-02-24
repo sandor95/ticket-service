@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Compile
-        run: mvn -B clean compile
+        run: mvn -B clean install -DskipTests
 
       - name: Unit test
         run: mvn -B test
