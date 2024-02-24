@@ -14,7 +14,8 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
-      - ./database/db_create.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database:/etc/db_scripts
     env_file:
       - .env
     environment:
