@@ -1,11 +1,11 @@
 package hu.otp.partner.common;
 
+import static hu.otp.ticket.service.Const.BUDAPEST_ZONE_ID;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
-import hu.otp.partner.knownobject.Dates;
 import org.junit.jupiter.api.Test;
 
 class UtilTest {
@@ -30,7 +30,7 @@ class UtilTest {
         assertThrows(UnsupportedOperationException.class, Util::new);
 
         LocalDateTime dateTime = LocalDateTime.of(2024, 5, 9, 20, 0, 0);
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(dateTime, Dates.BUDAPEST_ZONE_ID);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(dateTime, BUDAPEST_ZONE_ID);
         System.out.println(dateTime + " in epoch seconds: " + zonedDateTime.toEpochSecond());
     }
 }

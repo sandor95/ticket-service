@@ -12,11 +12,14 @@ spring:
 #    stream:
 #      name: ${MQ_QUEUE_NAME:JOURNAL}
 
-#  datasource:
-#    url: ${DATABASE_CONNECTION_URL:jdbc:mysql://localhost:3306/SERVICE_DEV}
-#    username: ${DATABASE_USERNAME:SERVICE}
-#    password: ${DATABASE_PASSWORD:SERVICE_123}
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: ${DATABASE_CONNECTION_URL:jdbc:mysql://localhost:3306/CORE_DEV}
+    username: ${DATABASE_USERNAME:CORE}
+    password: ${DATABASE_PASSWORD:CORE_123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
 
 springdoc:
   swagger-ui:

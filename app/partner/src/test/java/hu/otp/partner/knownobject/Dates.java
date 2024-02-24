@@ -1,12 +1,11 @@
 package hu.otp.partner.knownobject;
 
+import static hu.otp.ticket.service.Const.BUDAPEST_ZONE_ID;
+
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class Dates {
-
-    public static final ZoneId BUDAPEST_ZONE_ID = ZoneId.of("Europe/Budapest");
 
     public static final ZonedDateTime AUG_8_20H = ZonedDateTime.of(LocalDateTime.of(2024, 8, 8, 20, 0, 0), BUDAPEST_ZONE_ID);
 

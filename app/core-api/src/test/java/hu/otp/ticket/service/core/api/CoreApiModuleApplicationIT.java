@@ -1,4 +1,4 @@
-package it.otp.ticket.service.api;
+package hu.otp.ticket.service.core.api;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
