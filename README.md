@@ -1,3 +1,5 @@
+[![Ticket Service CI](https://github.com/sandor95/ticket-service/actions/workflows/master.yml/badge.svg)](https://github.com/sandor95/ticket-service/actions/workflows/master.yml)
+
 ## Build időben használt tool-ok
 
 ### Checkstyle
