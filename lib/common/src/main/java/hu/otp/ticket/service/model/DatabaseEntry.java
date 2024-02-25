@@ -1,4 +1,4 @@
-package hu.otp.partner.common.model;
+package hu.otp.ticket.service.model;
 
 import java.io.Serializable;
 

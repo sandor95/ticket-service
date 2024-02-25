@@ -12,13 +12,13 @@ import java.util.Optional;
 import hu.otp.partner.common.model.Event;
 import hu.otp.partner.exception.NoEntityFoundException;
 import hu.otp.partner.persistentlayer.EventPersistentLayerGateway;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@ExtendWith(MockitoExtension.class)
 class EventQueryServiceTest {
 
     @Mock

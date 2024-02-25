@@ -1,19 +1,14 @@
-package hu.otp.partner.common;
+package hu.otp.ticket.service.util;
 
 import java.time.ZonedDateTime;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Util {
 
-    private  static final long RANDOM_BOUND = 10L;
-
     private static final Long RESERVATION_ID_BASE_STEP = 2L;
 
-    private static final Random rnd = new Random();
-
-    private static final AtomicLong reservationIdCounter = new AtomicLong(1L);
+    private static final AtomicLong reservationIdCounter = new AtomicLong(0L);
 
     Util() {
         throw new UnsupportedOperationException("Cannot initialize utility class");
@@ -24,8 +19,7 @@ public class Util {
     }
 
     public static Long nextReservationId() {
-        long delta = rnd.nextLong(RANDOM_BOUND) + RESERVATION_ID_BASE_STEP;
-        return reservationIdCounter.addAndGet(delta);
+        return reservationIdCounter.addAndGet(RESERVATION_ID_BASE_STEP);
     }
 
     public static ZonedDateTime sysdate() {

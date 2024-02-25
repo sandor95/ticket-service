@@ -2,12 +2,12 @@ package hu.otp.partner.reservation;
 
 import static hu.otp.partner.reservation.exception.ReservationError.*;
 
-import hu.otp.partner.common.Util;
 import hu.otp.partner.common.model.Event;
 import hu.otp.partner.common.model.Ticket;
 import hu.otp.partner.persistentlayer.EventPersistentLayerGateway;
 import hu.otp.partner.persistentlayer.TicketPersistentLayerGateway;
 import hu.otp.partner.reservation.exception.ReservationException;
+import hu.otp.ticket.service.util.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

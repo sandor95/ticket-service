@@ -27,7 +27,7 @@
         <!-- Model lib -->
         <dependency>
             <groupId>hu.otp.ticket.service</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

@@ -263,7 +263,7 @@
                         <excludedClass>hu.otp.**.*Configuration</excludedClass>
                         <excludedClass>hu.otp.**.*Const</excludedClass>
                         <excludedClass>hu.otp.**.*Controller</excludedClass>
-                        <excludedClass>hu.otp.**.*Exception</excludedClass>
+                        <excludedClass>hu.otp.**.*Exception*</excludedClass>
                         <excludedClass>hu.otp.**.*Gateway</excludedClass>
                         <excludedClass>hu.otp.**.*Mock</excludedClass>
                         <excludedClass>hu.otp.**.model.*</excludedClass>

@@ -3,9 +3,13 @@ package hu.otp.partner.common.model;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
+import hu.otp.ticket.service.model.DatabaseEntry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter

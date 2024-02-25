@@ -1,4 +1,4 @@
-package hu.otp.ticket.service;
+package hu.otp.ticket.service.model;
 
 import lombok.Builder;
 import lombok.Getter;

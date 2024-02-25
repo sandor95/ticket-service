@@ -1,6 +1,7 @@
 package hu.otp.partner.common.model;
 
-import hu.otp.partner.common.Currency;
+import hu.otp.ticket.service.model.Currency;
+import hu.otp.ticket.service.model.DatabaseEntry;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,5 +1,6 @@
 package hu.otp.partner.common.model;
 
+import hu.otp.ticket.service.model.DatabaseEntry;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

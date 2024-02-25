@@ -1,7 +1,7 @@
 package hu.otp.partner.exception;
 
-import hu.otp.partner.common.Util;
-import hu.otp.ticket.service.ErrorMessage;
+import hu.otp.ticket.service.model.ErrorMessage;
+import hu.otp.ticket.service.util.Util;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.annotation.Priority;
 import lombok.extern.slf4j.Slf4j;

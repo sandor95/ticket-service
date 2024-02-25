@@ -2,9 +2,9 @@ package hu.otp.partner.knownobject;
 
 import static hu.otp.partner.knownobject.Seats.*;
 
-import hu.otp.partner.common.Currency;
 import hu.otp.partner.common.model.Ticket;
 import hu.otp.partner.query.model.SeatDTO;
+import hu.otp.ticket.service.model.Currency;
 
 public class Tickets {
 

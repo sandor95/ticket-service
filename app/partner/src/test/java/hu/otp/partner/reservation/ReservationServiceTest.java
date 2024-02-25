@@ -13,12 +13,12 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import hu.otp.partner.common.Util;
 import hu.otp.partner.common.model.Event;
 import hu.otp.partner.common.model.Ticket;
 import hu.otp.partner.persistentlayer.EventPersistentLayerGateway;
 import hu.otp.partner.persistentlayer.TicketPersistentLayerGateway;
 import hu.otp.partner.reservation.exception.ReservationException;
+import hu.otp.ticket.service.util.Util;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
