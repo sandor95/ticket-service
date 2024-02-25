@@ -1,7 +1,6 @@
-package hu.otp.ticket.service.core.api.validator;
+package hu.otp.ticket.service.core.api.tokenvalidation.validator;
 
 import static hu.otp.ticket.service.core.api.exception.TokenError.EXPIRED_OR_INVALID;
-import static hu.otp.ticket.service.core.api.validator.UserTokenValidatorImpl.*;
 
 import hu.otp.ticket.service.core.api.exception.TokenException;
 import org.apache.commons.lang3.StringUtils;
@@ -13,19 +12,19 @@ class UserTokenFormalValidator implements UserTokenValidator {
 
     @Override
     public void validate(Long assumedUserId, String encodedToken, String decodedToken) throws TokenException {
-        String[] values = StringUtils.split(decodedToken, SEPARATOR);
+        String[] values = StringUtils.split(decodedToken, UserTokenValidatorImpl.SEPARATOR);
         formalValidation(values);
     }
 
     private void formalValidation(String[] values) throws TokenException {
         checkNumberOfDataBlocks(values);
-        validateEmail(values[INDEX_OF_EMAIL]);
-        validateUserId(values[INDEX_OF_USER_ID]);
-        validateDeviceHash(values[INDEX_OF_DEVICE_HASH]);
+        validateEmail(values[UserTokenValidatorImpl.INDEX_OF_EMAIL]);
+        validateUserId(values[UserTokenValidatorImpl.INDEX_OF_USER_ID]);
+        validateDeviceHash(values[UserTokenValidatorImpl.INDEX_OF_DEVICE_HASH]);
     }
 
     private void checkNumberOfDataBlocks(String[] values) throws TokenException {
-        if (values.length != NUMBER_OF_DATA) {
+        if (values.length != UserTokenValidatorImpl.NUMBER_OF_DATA) {
             throw new TokenException(EXPIRED_OR_INVALID);
         }
     }
@@ -63,12 +62,6 @@ class UserTokenFormalValidator implements UserTokenValidator {
 
     private void checkIsAlphanumeric(String deviceHash) throws TokenException {
         if (!StringUtils.isAlphanumeric(deviceHash)) {
-            throw new TokenException(EXPIRED_OR_INVALID);
-        }
-    }
-
-    private void checkIsBlank(String str) throws TokenException {
-        if (StringUtils.isBlank(str)) {
             throw new TokenException(EXPIRED_OR_INVALID);
         }
     }

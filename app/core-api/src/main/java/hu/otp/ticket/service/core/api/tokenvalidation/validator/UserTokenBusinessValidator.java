@@ -1,6 +1,4 @@
-package hu.otp.ticket.service.core.api.validator;
-
-import static hu.otp.ticket.service.core.api.validator.UserTokenValidatorImpl.*;
+package hu.otp.ticket.service.core.api.tokenvalidation.validator;
 
 import java.util.Objects;
 
@@ -31,10 +29,10 @@ class UserTokenBusinessValidator implements UserTokenValidator {
 
     @Override
     public void validate(Long assumedUserId, String encodedToken, String decodedToken) throws TokenException {
-        String[] values = decodedToken.split(SEPARATOR);
-        Long userIdFromToken = Long.parseLong(values[INDEX_OF_USER_ID]);
-        String email = values[INDEX_OF_EMAIL];
-        String deviceHash = values[INDEX_OF_DEVICE_HASH];
+        String[] values = decodedToken.split(UserTokenValidatorImpl.SEPARATOR);
+        Long userIdFromToken = Long.parseLong(values[UserTokenValidatorImpl.INDEX_OF_USER_ID]);
+        String email = values[UserTokenValidatorImpl.INDEX_OF_EMAIL];
+        String deviceHash = values[UserTokenValidatorImpl.INDEX_OF_DEVICE_HASH];
 
         User user = userGateway.getUserById(userIdFromToken)
                                 .orElseThrow(() -> new TokenException(TokenError.EXPIRED_OR_INVALID));

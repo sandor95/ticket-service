@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.core.api.validator;
+package hu.otp.ticket.service.core.api.tokenvalidation.validator;
 
 import static org.junit.jupiter.api.Assertions.*;
 

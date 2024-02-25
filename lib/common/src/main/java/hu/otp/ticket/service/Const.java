@@ -9,4 +9,6 @@ public class Const {
     public static final Charset ENCODING = StandardCharsets.UTF_8;
 
     public static final ZoneId BUDAPEST_ZONE_ID = ZoneId.of("Europe/Budapest");
+
+    public static final String X_USER_TOKEN = "x-user-token";
 }

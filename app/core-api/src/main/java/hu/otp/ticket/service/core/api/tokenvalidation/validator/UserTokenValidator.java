@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.core.api.validator;
+package hu.otp.ticket.service.core.api.tokenvalidation.validator;
 
 import hu.otp.ticket.service.core.api.exception.TokenException;
 

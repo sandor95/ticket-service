@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.core.api.validator;
+package hu.otp.ticket.service.core.api.tokenvalidation.validator;
 
 import static hu.otp.ticket.service.core.api.exception.TokenError.EXPIRED_OR_INVALID;
 import static org.junit.jupiter.api.Assertions.*;
