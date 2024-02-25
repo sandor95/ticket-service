@@ -9,11 +9,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,15 +24,12 @@ public class TokenValidationController {
     private final TokenValidationServiceImpl validationService;
 
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "The given token is valid", useReturnTypeSchema = true),
-        @ApiResponse(responseCode = "400", description = "Token validation failed, details in response body",
-                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
-        @ApiResponse(responseCode = "500", description = "Technical error occurred, details in response body",
-                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))
+        @ApiResponse(responseCode = "200", description = "The given token is valid", useReturnTypeSchema = true)
     })
     @Operation(operationId = "validate",
             description = "Validates the token given in header",
-            parameters = {@Parameter(name = X_USER_TOKEN, in = ParameterIn.HEADER, description = "User token"),
+            parameters = {@Parameter(name = X_USER_TOKEN, in = ParameterIn.HEADER, description = "User token",
+                        content = @Content(schema = @Schema(implementation = String.class))),
                           @Parameter(name = "userId", in = ParameterIn.PATH, description = "User id")}
     )
     @PostMapping("/validate/{userId}")

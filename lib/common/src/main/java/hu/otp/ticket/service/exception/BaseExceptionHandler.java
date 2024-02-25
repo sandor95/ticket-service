@@ -2,6 +2,8 @@ package hu.otp.ticket.service.exception;
 
 import hu.otp.ticket.service.model.ErrorMessage;
 import hu.otp.ticket.service.util.Util;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -36,7 +38,8 @@ public class BaseExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    @ApiResponse(responseCode = "500", description = "Server error occured")
+    @ApiResponse(responseCode = "500", description = "Server error occurred",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))})
     public ResponseEntity<ErrorMessage> handleUnhandledException(Exception exception) {
         String errorId = Util.randomUuid();
         String message = "Unexpected error occurred! [" + errorId + "]";
