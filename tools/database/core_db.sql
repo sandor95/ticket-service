@@ -35,7 +35,29 @@ CREATE TABLE BANK_CARD
     VALID_TO    DATE         NOT NULL COMMENT 'Expiration month of the bank card. It stores the 1st day of the last valid month!
                                                 For example: 2022-02-01, it means the card valid till 2022-02-28 and invalid from 2022-03-01.',
     AMOUNT      INT(10)      NOT NULL COMMENT 'Actual amount',
-    CURRENCY    VARCHAR(255) NOT NULL COMMENT 'Currency of the card'
+    CURRENCY    VARCHAR(10)  NOT NULL COMMENT 'Currency of the card'
+);
+
+CREATE TABLE PAYMENT
+(
+    ID                     INT(10) PRIMARY KEY AUTO_INCREMENT COMMENT 'Unique identifier for the payment',
+    USER_ID                INT(10) COMMENT 'Identifier of the user making the payment',
+    CARD_ID                VARCHAR(10) COMMENT 'Identifier of the card used for the payment',
+    AMOUNT                 INT(10) COMMENT 'Amount of the payment',
+    CURRENCY               VARCHAR(10) COMMENT 'Currency of the payment',
+    PAYMENT_TRANSACTION_ID VARCHAR(255) UNIQUE COMMENT 'Unique transaction identifier for the payment',
+    ERROR_CODE             INT(5) COMMENT 'The code of the error occurred during payment',
+    TRANSACTION_TIME       TIMESTAMP NOT NULL COMMENT 'Timestamp of the payment'
+);
+
+CREATE TABLE PAYMENT_LOCK
+(
+    ID             INT(10)      NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Lock ID.',
+    CARD_ID        VARCHAR(10)  NOT NULL COMMENT 'References CARD.CARD_ID.',
+    USER_ID        INT(10)      NOT NULL COMMENT 'References USER.ID',
+    TRANSACTION_ID VARCHAR(200) NOT NULL UNIQUE COMMENT 'An OTP Mobil system-wide ID for payment transaction.',
+    CREATED_AT     TIMESTAMP    NOT NULL DEFAULT NOW() COMMENT 'Lock creation timestamp',
+    UNIQUE KEY UQ_EVENT_USER (CARD_ID, USER_ID) -- NOTE: fails the lock insert if user wants to start another payment
 );
 
 
@@ -47,6 +69,10 @@ ALTER TABLE TOKEN
 
 ALTER TABLE BANK_CARD
     ADD FOREIGN KEY (USER_ID) REFERENCES USER (ID);
+
+ALTER TABLE PAYMENT
+    ADD FOREIGN KEY (USER_ID) REFERENCES USER (ID);
+
 
 
 -- DATA SEEDING

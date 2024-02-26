@@ -33,3 +33,6 @@ source /etc/db_scripts/partner_db.sql;
 
 -- Initializes core-api schema
 source /etc/db_scripts/core_db.sql;
+
+-- Initializes ticket-api schema
+source /etc/db_scripts/ticket_db.sql;

@@ -233,6 +233,7 @@
                         <param>hu/otp/**/*Const*</param>
                         <param>hu/otp/**/*Controller*</param>
                         <param>hu/otp/**/*Exception*</param>
+                        <param>hu/otp/**/*Error*</param>
                         <param>hu/otp/**/*Gateway*</param>
                         <param>hu/otp/**/*Mock*</param>
                         <param>hu/otp/**/model/**</param>
@@ -265,6 +266,7 @@
                         <excludedClass>hu.otp.**.*Const</excludedClass>
                         <excludedClass>hu.otp.**.*Controller</excludedClass>
                         <excludedClass>hu.otp.**.*Exception*</excludedClass>
+                        <excludedClass>hu.otp.**.*Error*</excludedClass>
                         <excludedClass>hu.otp.**.*Gateway</excludedClass>
                         <excludedClass>hu.otp.**.*Mock</excludedClass>
                         <excludedClass>hu.otp.**.model.*</excludedClass>

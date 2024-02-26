@@ -17,4 +17,8 @@ public class UserGateway {
     public Optional<User> getUserById(@NotNull Long userId) {
         return repository.findById(userId);
     }
+
+    public Optional<User> getUserWithBankCardByCardId(Long userId, String cardId) {
+        return repository.findByUserIdAndCardIdWithCard(userId, cardId);
+    }
 }

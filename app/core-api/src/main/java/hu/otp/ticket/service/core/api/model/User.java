@@ -1,5 +1,6 @@
 package hu.otp.ticket.service.core.api.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import hu.otp.ticket.service.model.DatabaseEntry;
@@ -29,11 +30,14 @@ public class User extends DatabaseEntry {
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Device> devices;
+    private Set<Device> devices = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Token> tokens;
+    private Set<Token> tokens = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BankCard> cards;
+    private Set<BankCard> cards = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Payment> payments = new HashSet<>();
 }

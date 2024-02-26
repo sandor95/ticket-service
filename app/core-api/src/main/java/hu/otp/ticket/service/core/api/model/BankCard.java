@@ -1,5 +1,9 @@
 package hu.otp.ticket.service.core.api.model;
 
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 import hu.otp.ticket.service.model.Currency;
 import hu.otp.ticket.service.model.DatabaseEntry;
 import jakarta.persistence.*;
@@ -37,4 +41,10 @@ public class BankCard extends DatabaseEntry {
     @Enumerated(EnumType.STRING)
     @Column(name = "CURRENCY", nullable = false)
     private Currency currency;
+
+    @Column(name = "VALID_TO", columnDefinition = "TIMESTAMP")
+    private ZonedDateTime validTo;
+
+    @OneToMany(mappedBy = "card", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Payment> payments = new HashSet<>();
 }
