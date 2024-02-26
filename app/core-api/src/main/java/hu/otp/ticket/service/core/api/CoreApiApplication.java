@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         contact = @Contact(name = "OTP Mobil Kft.", email = "info@otpmobil.com"), version = "v1"))
 @EnableTransactionManagement
 @SpringBootApplication
-public class CoreApiModuleApplication {
+public class CoreApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CoreApiModuleApplication.class, args);
+        SpringApplication.run(CoreApiApplication.class, args);
     }
 }
