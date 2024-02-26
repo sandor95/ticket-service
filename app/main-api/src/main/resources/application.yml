@@ -1,0 +1,13 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: MAIN-API
+
+springdoc:
+  swagger-ui:
+    display-operation-id: true
+    syntax-highlight:
+      activated: true
+      theme: "agate"

@@ -17,6 +17,7 @@
         <module>docs</module>
         <module>app</module>
         <module>lib</module>
+        <module>app/main-api</module>
     </modules>
 
     <parent>
