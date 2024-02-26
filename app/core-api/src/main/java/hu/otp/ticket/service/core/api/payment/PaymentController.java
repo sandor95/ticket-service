@@ -1,6 +1,7 @@
 package hu.otp.ticket.service.core.api.payment;
 
 import static hu.otp.ticket.service.Const.X_USER_TOKEN;
+import static hu.otp.ticket.service.core.api.CoreApiApplication.APP_NAME;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.util.Map;
@@ -12,6 +13,10 @@ import hu.otp.ticket.service.core.api.payment.exception.PaymentException;
 import hu.otp.ticket.service.core.api.payment.model.PaymentRequestDTO;
 import hu.otp.ticket.service.core.api.payment.model.PaymentResponseDTO;
 import hu.otp.ticket.service.core.api.tokenvalidation.validator.UserTokenValidator;
+import hu.otp.ticket.service.journal.Journal;
+import hu.otp.ticket.service.journal.JournalService;
+import hu.otp.ticket.service.journal.JournalType;
+import hu.otp.ticket.service.util.Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -37,12 +42,16 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
+    private final JournalService journalService;
+
     @Autowired
     public PaymentController(@Qualifier("tokenFormalValidator") UserTokenValidator tokenValidator,
-                             PaymentConverter paymentConverter, PaymentService paymentService) {
+                             PaymentConverter paymentConverter, PaymentService paymentService,
+                             JournalService journalService) {
         this.tokenFormalValidator = tokenValidator;
         this.paymentConverter = paymentConverter;
         this.paymentService = paymentService;
+        this.journalService = journalService;
     }
 
     @ApiResponses({
@@ -70,7 +79,9 @@ public class PaymentController {
         Payment payment = paymentConverter.convertToEntity(requestDTO);
         Payment approvedPayment = paymentService.pay(payment);
         log.info("Successful payment: {}", approvedPayment.getPaymentTransactionId());
-        return paymentConverter.convertToDTO(approvedPayment);
+        PaymentResponseDTO responseDTO = paymentConverter.convertToDTO(approvedPayment);
+        saveJournal(responseDTO);
+        return responseDTO;
     }
 
     private void validateParameters(PaymentRequestDTO requestDTO) throws PaymentException {
@@ -78,5 +89,19 @@ public class PaymentController {
             || isBlank(requestDTO.cardId()) || isBlank(requestDTO.paymentTransactionId())) {
             throw new PaymentException(PaymentError.INVALID_PARAMETERS);
         }
+    }
+
+    private void saveJournal(PaymentResponseDTO paymentResponseDTO) {
+        Journal journal = Journal.builder()
+                                .application(APP_NAME)
+                                .type(JournalType.PAYMENT)
+                                .timestamp(Util.sysdate())
+                                .content(createJournalContent(paymentResponseDTO))
+                                .build();
+        journalService.save(journal);
+    }
+
+    private String createJournalContent(PaymentResponseDTO response) {
+        return "Successful payment transaction!\n".concat("Response: ").concat(response.toString());
     }
 }

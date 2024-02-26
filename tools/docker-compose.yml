@@ -29,18 +29,18 @@ services:
         window: 60s
 
   # RabbitMQ
-#  message_queue:
-#    image: rabbitmq:3.12.10-management-alpine
-#    container_name: ts_rabbit
-#    volumes:
-#      - ./rabbit_mq/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
-#      - ./rabbit_mq/definitions.json:/etc/rabbitmq/definitions.json
-#    ports:
-#      - "5672:5672"
-#      - "15672:15672"
-#    deploy:
-#      restart_policy:
-#        condition: on-failure
-#        delay: 5s
-#        max_attempts: 5
-#        window: 60s
+  message_queue:
+    image: rabbitmq:3.12.10-management-alpine
+    container_name: ts_rabbit
+    volumes:
+      - ./rabbit_mq/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbit_mq/definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 60s

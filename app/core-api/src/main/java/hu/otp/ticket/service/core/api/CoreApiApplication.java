@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 public class CoreApiApplication {
 
+    public static final String APP_NAME = "CORE-API";
+
     public static void main(String[] args) {
         SpringApplication.run(CoreApiApplication.class, args);
     }

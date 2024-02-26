@@ -106,7 +106,7 @@
       "vhost": "/",
       "destination": "CENTRAL_JOURNAL",
       "destination_type": "queue",
-      "routing_key": "JournalType.CENTRAL",
+      "routing_key": "CENTRAL",
       "arguments": {}
     }
   ]

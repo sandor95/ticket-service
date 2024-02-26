@@ -1,10 +1,15 @@
 package hu.otp.ticket.service.core.api.tokenvalidation;
 
 import static hu.otp.ticket.service.Const.X_USER_TOKEN;
+import static hu.otp.ticket.service.core.api.CoreApiApplication.APP_NAME;
 
 import java.util.Map;
 
 import hu.otp.ticket.service.core.api.tokenvalidation.model.TokenValidationResultDTO;
+import hu.otp.ticket.service.journal.Journal;
+import hu.otp.ticket.service.journal.JournalService;
+import hu.otp.ticket.service.journal.JournalType;
+import hu.otp.ticket.service.util.Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -23,6 +28,8 @@ public class TokenValidationController {
 
     private final TokenValidationServiceImpl validationService;
 
+    private final JournalService journalService;
+
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "The given token is valid", useReturnTypeSchema = true)
     })
@@ -35,7 +42,24 @@ public class TokenValidationController {
     @PostMapping("/validate/{userId}")
     public TokenValidationResultDTO validate(@RequestHeader Map<String, String> headers, @PathVariable Long userId) {
         String token = headers.get(X_USER_TOKEN);
-        return validationService.validate(userId, token);
-        // TODO: insert journal record
+        TokenValidationResultDTO validationResultDTO = validationService.validate(userId, token);
+        saveJournal(userId, token, validationResultDTO);
+        return validationResultDTO;
+    }
+
+    private void saveJournal(Long userId, String token, TokenValidationResultDTO validationResultDTO) {
+        Journal journal = Journal.builder()
+                                .user(userId.toString())
+                                .application(APP_NAME)
+                                .type(JournalType.TOKEN_VALIDATION)
+                                .timestamp(Util.sysdate())
+                                .content(createJournalContent(token, validationResultDTO))
+                                .build();
+        journalService.save(journal);
+    }
+
+    private String createJournalContent(String token, TokenValidationResultDTO validationResultDTO) {
+        return "Token validation requested with token: [".concat(token).concat("]\n")
+                .concat("Result: ").concat(validationResultDTO.toString());
     }
 }

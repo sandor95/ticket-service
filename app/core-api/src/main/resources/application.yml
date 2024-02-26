@@ -5,12 +5,14 @@ spring:
   application:
     name: CORE-API
 
-#  rabbitmq:
-#    host: ${MQ_HOST:localhost}
-#    username: ${MQ_USERNAME:api_service}
-#    password: ${MQ_PASSWORD:api_service_123}
-#    stream:
-#      name: ${MQ_QUEUE_NAME:JOURNAL}
+  rabbitmq:
+    host: ${MQ_HOST:localhost}
+    username: ${MQ_USERNAME:api_service}
+    password: ${MQ_PASSWORD:api_service_123}
+    stream:
+      routing-key: ${MQ_ROUTING_KEY:JOURNAL}
+      topic-key: ${MQ_TOPIC_KEY:CENTRAL}
+
 
   datasource:
     url: ${DATABASE_CONNECTION_URL:jdbc:mysql://localhost:3306/CORE_DEV}

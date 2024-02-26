@@ -16,6 +16,7 @@
     <name>................  LIB parent module  ...............</name>
     <modules>
         <module>common</module>
+        <module>journal</module>
     </modules>
 
     <dependencies>
