@@ -1,5 +1,6 @@
 package hu.otp.ticket.service.core.api.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import hu.otp.ticket.service.journal.ExternalJournalService;
@@ -17,8 +18,9 @@ public class JournalConfiguration {
                                          @Value("${spring.rabbitmq.stream.topic-key}") String topicKey,
                                          RabbitTemplate rabbitTemplate) {
         ObjectMapper objectMapper = new ObjectMapper()
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .findAndRegisterModules();
+                                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                                .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+                                .findAndRegisterModules();
         return new ExternalJournalService(objectMapper, rabbitTemplate, routingKey, topicKey);
     }
 }

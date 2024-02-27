@@ -1,6 +1,7 @@
 package hu.otp.ticket.service.journal;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hu.otp.ticket.service.journal.model.Journal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

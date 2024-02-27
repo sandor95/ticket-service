@@ -6,9 +6,9 @@ import static hu.otp.ticket.service.core.api.CoreApiApplication.APP_NAME;
 import java.util.Map;
 
 import hu.otp.ticket.service.core.api.tokenvalidation.model.TokenValidationResultDTO;
-import hu.otp.ticket.service.journal.Journal;
 import hu.otp.ticket.service.journal.JournalService;
-import hu.otp.ticket.service.journal.JournalType;
+import hu.otp.ticket.service.journal.model.Journal;
+import hu.otp.ticket.service.journal.model.JournalType;
 import hu.otp.ticket.service.util.Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

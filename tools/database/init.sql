@@ -36,3 +36,6 @@ source /etc/db_scripts/core_db.sql;
 
 -- Initializes ticket-api schema
 source /etc/db_scripts/ticket_db.sql;
+
+-- Initializes journal-consumer schema
+source /etc/db_scripts/journal_db.sql;

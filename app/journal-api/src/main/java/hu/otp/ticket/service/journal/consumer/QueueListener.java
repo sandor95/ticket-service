@@ -1,7 +1,7 @@
-package hu.otp.ticket.service.journal;
+package hu.otp.ticket.service.journal.consumer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hu.otp.ticket.service.journal.model.Journal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -15,14 +15,16 @@ public class QueueListener {
 
     private final ObjectMapper objectMapper;
 
+    private final JournalService journalService;
+
     @RabbitListener(queues = "${spring.rabbitmq.stream.topic-key}")
     public void listenJournalQueue(String rawJournal) {
-        log.info("Received rawJournal entity: {}", rawJournal);
+        log.trace("Received rawJournal entity: {}", rawJournal);
         try {
             Journal journal = objectMapper.readValue(rawJournal, Journal.class);
-            log.info("Received time: " + journal.getTimestamp());
-        } catch (JsonProcessingException e) {
-            log.error("Exception occurred.", e);
+            journalService.saveJournal(journal);
+        } catch (Exception e) {
+            log.error("Exception occurred during new journal record processing", e);
         }
     }
 }

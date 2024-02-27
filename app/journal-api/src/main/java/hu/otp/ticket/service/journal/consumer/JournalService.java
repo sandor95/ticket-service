@@ -1,8 +1,8 @@
-package hu.otp.ticket.service.journal;
+package hu.otp.ticket.service.journal.consumer;
 
 import hu.otp.ticket.service.journal.model.Journal;
 
 public interface JournalService {
 
-    void save(Journal journal);
+    void saveJournal(Journal journal);
 }

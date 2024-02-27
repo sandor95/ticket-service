@@ -1,5 +1,6 @@
 package hu.otp.ticket.service.journal;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
@@ -19,6 +20,7 @@ public class JournalConsumerApplication {
     public ObjectMapper objectMapper() {
         return new ObjectMapper()
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
                 .findAndRegisterModules();
     }
 }

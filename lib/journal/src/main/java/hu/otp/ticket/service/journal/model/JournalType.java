@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.journal;
+package hu.otp.ticket.service.journal.model;
 
 public enum JournalType {
 

@@ -15,6 +15,14 @@
 
     <dependencies>
 
+        <!-- Common lib -->
+        <dependency>
+            <groupId>hu.otp.ticket.service</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- AMQP implementations -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -23,10 +31,34 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jackson parser -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.16.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- Spring JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Mockito Jupiter extension -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
