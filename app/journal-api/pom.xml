@@ -10,25 +10,12 @@
     </parent>
 
     <groupId>hu.otp.ticket.service</groupId>
-    <artifactId>core-api</artifactId>
+    <artifactId>journal-api</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
 
-        <!-- Apache commons validators -->
-        <dependency>
-            <groupId>commons-validator</groupId>
-            <artifactId>commons-validator</artifactId>
-            <version>1.8.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Journal -->
+        <!-- Journal model -->
         <dependency>
             <groupId>hu.otp.ticket.service</groupId>
             <artifactId>journal</artifactId>

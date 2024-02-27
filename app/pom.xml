@@ -18,6 +18,7 @@
     <modules>
         <module>core-api</module>
         <module>partner</module>
+        <module>journal-api</module>
     </modules>
 
     <dependencies>
