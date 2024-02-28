@@ -71,4 +71,4 @@ jobs:
           java-version: '17'
 
       - name: Mutation test
-        run: mvn -B pitest:mutationCoverage -T 4
+        run: mvn -B test-compile pitest:mutationCoverage -T 4
