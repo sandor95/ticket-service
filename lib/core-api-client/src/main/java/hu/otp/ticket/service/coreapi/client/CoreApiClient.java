@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.main.api;
+package hu.otp.ticket.service.coreapi.client;
 
 import hu.otp.ticket.service.core.api.client.api.TokenValidationControllerApi;
 import hu.otp.ticket.service.core.api.client.model.TokenValidationResultDTO;
@@ -15,4 +15,5 @@ public class CoreApiClient {
     public TokenValidationResultDTO validateToken(Long userId, String token) {
         return tokenValidationApi.validate(userId, token);
     }
+
 }

@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.main.api;
+package hu.otp.ticket.service.coreapi.client;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;

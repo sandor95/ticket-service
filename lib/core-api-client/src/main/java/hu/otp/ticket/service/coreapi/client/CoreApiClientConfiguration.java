@@ -1,4 +1,4 @@
-package hu.otp.ticket.service.main.api;
+package hu.otp.ticket.service.coreapi.client;
 
 import hu.otp.ticket.service.core.api.client.ApiClient;
 import hu.otp.ticket.service.core.api.client.api.TokenValidationControllerApi;
@@ -13,8 +13,8 @@ public class CoreApiClientConfiguration {
     public TokenValidationControllerApi tokenValidationApi(@Value("${core-api.url}") String coreApiUrl,
                                                            @Value("${core-api.timeout:60000}") Long timeout) {
         ApiClient apiClient = new ApiClient()
-                .setBasePath(coreApiUrl)
-                .setWaitTimeMillis(timeout);
+                            .setBasePath(coreApiUrl)
+                            .setWaitTimeMillis(timeout);
         return new TokenValidationControllerApi(apiClient);
     }
 }
