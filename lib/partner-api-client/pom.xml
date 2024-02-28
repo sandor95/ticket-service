@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>hu.otp.ticket.service</groupId>
-    <artifactId>partner-client</artifactId>
+    <artifactId>partner-api-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
