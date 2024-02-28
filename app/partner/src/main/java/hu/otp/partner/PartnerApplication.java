@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @OpenAPIDefinition(info = @Info(title = "PARTNER definition",
         description = "A hypothetical application that provides information about events and allows users to book tickets.",
-        contact = @Contact(name = "Partner Kft.", email = "info@partner.hu")))
+        contact = @Contact(name = "Partner Kft.", email = "info@partner.hu"), version = "v1"))
 @EnableTransactionManagement
 @SpringBootApplication
 public class PartnerApplication {

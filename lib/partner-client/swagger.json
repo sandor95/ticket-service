@@ -1,0 +1,294 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PARTNER definition",
+    "description": "A hypothetical application that provides information about events and allows users to book tickets.",
+    "contact": {
+      "name": "Partner Kft.",
+      "email": "info@partner.hu"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8084",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/reserve/event/{eventId}/seat/{seatId}": {
+      "post": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "Reserve seat for event.",
+        "operationId": "reserve",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "seatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Seat reservation was successful",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User and/or session values are invalid, details in response body",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Seat reservation failed, details in response body",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationDTO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getEvents": {
+      "get": {
+        "tags": [
+          "event-query-controller"
+        ],
+        "description": "Fetch all available events.",
+        "operationId": "getEvents",
+        "responses": {
+          "200": {
+            "description": "All available events",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDataDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User and/or session values are invalid, details in response body",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDataDTO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getEvent/{id}": {
+      "get": {
+        "tags": [
+          "event-query-controller"
+        ],
+        "description": "Fetch event details.",
+        "operationId": "getEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event details",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDetailsDataDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User and/or session values are invalid, details in response body",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDetailsDataDTO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "ReservationDTO": {
+        "type": "object",
+        "properties": {
+          "reservationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "errorCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EventDTO": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "startTimeStamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "endTimeStamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "EventDataDTO": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventDTO"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EventDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "seats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeatDTO"
+            }
+          }
+        }
+      },
+      "EventDetailsDataDTO": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EventDetailsDTO"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SeatDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "reserved": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
