@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  compile:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,13 +20,28 @@ jobs:
           java-version: '17'
 
       - name: Compile
-        run: mvn -B clean install -DskipTests
+        run: mvn -B clean install -DskipTests -T 4
 
+  unit-test:
+    needs: compile
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Unit test
-        run: mvn -B test
+        run: mvn -B test -T 4
 
-      - name: Integration test
-        run: mvn -B verify -Dskip.unit.test=true
+  integration-test:
+    needs: unit-test
+    runs-on: ubuntu-latest
 
+    steps:
       - name: Integration test
-        run: mvn -B pitest:mutationCoverage
+        run: mvn -B verify -Dskip.unit.test=true -T 4
+
+  mutation-test:
+    needs: unit-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mutation test
+        run: mvn -B pitest:mutationCoverage -T 4
