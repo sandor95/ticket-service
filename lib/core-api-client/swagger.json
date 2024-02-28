@@ -1,0 +1,216 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OTP Mobil - Ticket Service CORE-API definition",
+    "description": "Ticket Service core module.",
+    "contact": {
+      "name": "OTP Mobil Kft.",
+      "email": "info@otpmobil.com"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/token/validate/{userId}": {
+      "post": {
+        "tags": [
+          "token-validation-controller"
+        ],
+        "description": "Validates the token given in header",
+        "operationId": "validate",
+        "parameters": [
+          {
+            "name": "x-user-token",
+            "in": "header",
+            "description": "User token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The given token is valid",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenValidationResultDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Payment was rejected, details in response body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponseDTO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pay": {
+      "post": {
+        "tags": [
+          "payment-controller"
+        ],
+        "description": "Creates a seat reservation and fully handles payment transaction",
+        "operationId": "pay",
+        "parameters": [
+          {
+            "name": "x-user-token",
+            "in": "header",
+            "description": "User token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful payment",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Payment failed, details in response body",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "422": {
+            "description": "HTTP request cannot be processed due validation error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponseDTO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Technical error occurred, details in response body",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaymentResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errorCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentTransactionId": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenValidationResultDTO": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PaymentRequestDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "paymentTransactionId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

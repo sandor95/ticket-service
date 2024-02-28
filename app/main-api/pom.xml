@@ -14,4 +14,12 @@
     <artifactId>main-api</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>hu.otp.ticket.service</groupId>
+            <artifactId>core-api-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

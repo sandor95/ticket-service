@@ -17,6 +17,7 @@
     <modules>
         <module>common</module>
         <module>journal</module>
+        <module>core-api-client</module>
     </modules>
 
     <dependencies>
