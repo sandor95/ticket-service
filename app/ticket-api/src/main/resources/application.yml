@@ -31,3 +31,9 @@ springdoc:
     syntax-highlight:
       activated: true
       theme: "agate"
+
+core-api:
+  url: '${CORE_API_URL:http://localhost:8081/}'
+
+partner-api:
+  url: '${PARTNER_API_URL:http://localhost:8084/}'

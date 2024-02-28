@@ -59,7 +59,7 @@ public class TokenValidationController {
     }
 
     private String createJournalContent(String token, TokenValidationResultDTO validationResultDTO) {
-        return "Token validation requested with token: [".concat(token).concat("]\n")
+        return "Token validation requested with token: [" + token + "]\n"
                 .concat("Result: ").concat(validationResultDTO.toString());
     }
 }

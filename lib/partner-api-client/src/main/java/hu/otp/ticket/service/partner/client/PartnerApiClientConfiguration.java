@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class PartnerApiClientConfiguration {
 
     @Bean
-    public ApiClient coreApiConfigClient(@Value("${partner-api.url}") String coreApiUrl,
+    public ApiClient partnerApiConfigClient(@Value("${partner-api.url}") String coreApiUrl,
                                          @Value("${partner-api.timeout:60000}") Long timeout) {
         return new ApiClient()
                 .setBasePath(coreApiUrl)
