@@ -1,0 +1,33 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: TICKET-API
+
+  rabbitmq:
+    host: ${MQ_HOST:localhost}
+    username: ${MQ_USERNAME:api_service}
+    password: ${MQ_PASSWORD:api_service_123}
+    stream:
+      routing-key: ${MQ_ROUTING_KEY:JOURNAL}
+      topic-key: ${MQ_TOPIC_KEY:CENTRAL}
+
+
+  datasource:
+    url: ${DATABASE_CONNECTION_URL:jdbc:mysql://localhost:3306/TICKET_DEV}
+    username: ${DATABASE_USERNAME:TICKET}
+    password: ${DATABASE_PASSWORD:TICKET_123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+springdoc:
+  swagger-ui:
+    display-operation-id: true
+    syntax-highlight:
+      activated: true
+      theme: "agate"
