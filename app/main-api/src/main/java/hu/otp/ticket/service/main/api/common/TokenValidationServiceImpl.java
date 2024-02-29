@@ -20,7 +20,7 @@ public class TokenValidationServiceImpl implements TokenValidationService {
         TokenValidationResultDTO validationResultDTO = coreApiClient.validateToken(userId, token);
         if (validationResultDTO == null || !StringUtils.equalsIgnoreCase(validationResultDTO.getResult(), "SUCCESS")
                 || validationResultDTO.getErrorCode() != null) {
-            throw new TokenValidationException();
+            throw new TokenValidationException(validationResultDTO != null ? validationResultDTO.getErrorCode() : null);
         }
     }
 }

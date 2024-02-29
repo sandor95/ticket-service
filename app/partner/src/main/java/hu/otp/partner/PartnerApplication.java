@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         description = "A hypothetical application that provides information about events and allows users to book tickets.",
         contact = @Contact(name = "Partner Kft.", email = "info@partner.hu"), version = "v1"))
 @EnableTransactionManagement
-@SpringBootApplication
+@SpringBootApplication // (exclude = {SecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
 public class PartnerApplication {
 
     public static void main(String[] args) {

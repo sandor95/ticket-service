@@ -39,10 +39,24 @@ public class MainApiExceptionHandler extends BaseExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
 
+    @ExceptionHandler(TokenValidationException.class)
+    @ApiResponse(responseCode = "400", description = "Invalid user credentials",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))})
+    public ResponseEntity<ErrorMessage> handleTokenValidationException(TokenValidationException exception) {
+        log.warn("Token validation failed!", exception);
+        String uuid = Util.randomUuid();
+        ErrorMessage errorMessage = ErrorMessage.builder()
+                                                .id(uuid)
+                                                .message("Wrong credentials [" + exception.getErrorCode() + "]")
+                                                .build();
+        saveJournal(errorMessage, exception);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
+
     private void saveJournal(ErrorMessage errorMessage, Exception exception) {
         Journal journal = Journal.builder()
                 .application(APP_NAME)
-                .type(JournalType.PAYMENT)
+                .type(JournalType.TOKEN_VALIDATION)
                 .timestamp(Util.sysdate())
                 .content(createJournalContent(errorMessage, exception))
                 .build();
