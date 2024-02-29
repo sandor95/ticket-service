@@ -1,5 +1,6 @@
 package hu.otp.ticket.service.ticket.api.exception;
 
+import hu.otp.ticket.service.exception.BaseExceptionHandler;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.annotation.Priority;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @Priority(5)
 @RestControllerAdvice(basePackages = "hu.otp.ticket.service.ticket.api")
-public class TicketApiExceptionHandler {
+public class TicketApiExceptionHandler extends BaseExceptionHandler {
 
     @ExceptionHandler(InvalidUserException.class)
     @ApiResponse(responseCode = "401", description = "Invalid user")

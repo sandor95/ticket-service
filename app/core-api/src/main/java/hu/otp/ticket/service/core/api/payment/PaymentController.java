@@ -46,7 +46,7 @@ public class PaymentController {
     private final JournalService journalService;
 
     @Autowired
-    public PaymentController(@Qualifier("tokenFormalValidator") UserTokenValidator tokenValidator,
+    public PaymentController(@Qualifier("tokenValidator") UserTokenValidator tokenValidator,
                              PaymentConverter paymentConverter, PaymentService paymentService,
                              JournalService journalService) {
         this.tokenFormalValidator = tokenValidator;
@@ -69,12 +69,6 @@ public class PaymentController {
     @PostMapping("/pay")
     public PaymentResponseDTO pay(@RequestHeader Map<String, String> headers,
                                   @RequestBody PaymentRequestDTO requestDTO) throws PaymentException, TokenException {
-        // TODO for ticket-api:
-        //  - validate token
-        //  - extract userId from token
-        //  - call core-api for payment
-        //  - call seat reservation
-        //  - after successful reservation commit transaction (change amount, journal, etc.)
         log.info("Payment request received with ID: {}", requestDTO.paymentTransactionId());
         validateParameters(requestDTO);
         tokenFormalValidator.validate(requestDTO.userId(), headers.get(X_USER_TOKEN), null);

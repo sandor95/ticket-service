@@ -1,8 +1,13 @@
 package hu.otp.ticket.service.util;
 
+import static hu.otp.ticket.service.Const.BUDAPEST_ZONE_ID;
+
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
+
+import jakarta.validation.constraints.NotNull;
 
 public class Util {
 
@@ -24,5 +29,10 @@ public class Util {
 
     public static ZonedDateTime sysdate() {
         return ZonedDateTime.now();
+    }
+
+    public static ZonedDateTime parseFromUtc(@NotNull Long timeInSeconds) {
+        Instant instant = Instant.ofEpochMilli(timeInSeconds);
+        return ZonedDateTime.ofInstant(instant, BUDAPEST_ZONE_ID);
     }
 }
