@@ -17,7 +17,6 @@
         <module>docs</module>
         <module>app</module>
         <module>lib</module>
-        <module>app/main-api</module>
     </modules>
 
     <parent>
@@ -291,12 +290,5 @@
 
         </plugins>
     </build>
-
-    <scm>
-        <connection>scm:git:ssh://git@github.com:7999/snappycodingteam/lottery-engine.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:7999/snappycodingteam/lottery-engine.git</developerConnection>
-        <url>scm:git:ssh://git@github.com:7999/snappycodingteam/lottery-engine.git</url>
-        <tag>lottery-engine-0.0.1</tag>
-    </scm>
 
 </project>
