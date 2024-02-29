@@ -2,6 +2,8 @@
 
 ## Futtatás
 
+*A fejlesztés teljes mértékben Linux-on történt, bár igyekeztem szem előtt tartani, hogy az encoding ne okozzon problémát, egyik rendszeren sem. Windows rendszeren nem történt buildelés és/vagy tesztelés.*
+
 ### Előkészületek
 
 A projekt dokumentációjában ismertetett infrastruktúra lokális felépítéséhez a `tools` mappában ki kell adni a `docker-compose up` parancsot, mely egy MySQL adatbázist épít fel, illetve tölti be a default adatokat, e mellett pedig egy RabbitMQ broker-t is.
