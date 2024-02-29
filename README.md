@@ -11,7 +11,7 @@ A projekt dokumentációjában ismertetett infrastruktúra lokális felépítés
 ### API-k indítása
 
 Az api-k elő vannak készítve a "dockeresítésre", azonban ez "nice to have" feature volt a fejlesztés alatt, mivel a lokális használathoz mellékes extra lett volna. Ebből kifolyólag az api-k "kézihajtényosak":
-- IDEA-ból indítva: build, majd runt
+- IDEA-ból indítva: `build` -> `run`
 - terminálból indítva: `mvn clean install -DskipTests`, majd `java -jar path/to/target/*.jar`
 
 ### Swagger UI
