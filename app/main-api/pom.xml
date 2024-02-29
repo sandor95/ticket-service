@@ -15,11 +15,21 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+
+        <!-- Core-api client -->
         <dependency>
             <groupId>hu.otp.ticket.service</groupId>
             <artifactId>core-api-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- Ticket-api client -->
+        <dependency>
+            <groupId>hu.otp.ticket.service</groupId>
+            <artifactId>ticket-api-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>

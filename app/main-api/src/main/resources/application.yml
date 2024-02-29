@@ -15,3 +15,6 @@ springdoc:
 
 core-api:
   url: '${CORE_API_URL:http://localhost:8081/}'
+
+ticket-api:
+  url: '${CORE_API_URL:http://localhost:8083/}'
