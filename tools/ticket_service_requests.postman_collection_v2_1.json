@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "a96b33b7-022b-49a7-8893-f4752df82718",
+		"name": "Ticket Service requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22923239"
+	},
+	"item": [
+		{
+			"name": "Partner requests",
+			"item": [
+				{
+					"name": "Get events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/getEvents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"getEvents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/getEvent/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"getEvent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reserve seat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/reserve/event/1/seat/s3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"reserve",
+								"event",
+								"1",
+								"seat",
+								"s3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Core requests",
+			"item": [
+				{
+					"name": "OpenAPI yml",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v3/api-docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v3",
+								"api-docs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-user-token",
+								"value": "dGVzenQuYmVuZWRla0BvdHBtb2JpbC5jb20mMjAwMCZGQURERkVBNTYyRjNDOTE0RENDODE5NTY2ODJEQjBGQw==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/token/validate/2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"token",
+								"validate",
+								"2000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 5500,\n    \"cardId\": \"C0006\",\n    \"amount\": 5000,\n    \"currency\": \"HUF\",\n    \"paymentTransactionId\": \"eee1-2ihjkdfesdlégfj4ewdz-5-54-6-g-w4-t32-2-34-3t\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"pay"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket api requests",
+			"item": [
+				{
+					"name": "Get events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/partner/event/all?userid=123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"partner",
+								"event",
+								"all"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/getEvent/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"getEvent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seat reservation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-user-token",
+								"value": "dGVzenQuYmVuZWRla0BvdHBtb2JpbC5jb20mMjAwMCZGQURERkVBNTYyRjNDOTE0RENDODE5NTY2ODJEQjBGQw==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8083/reserve/event/@5/seat/@S8?userid=2000&cardid=C0002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"reserve",
+								"event",
+								"@5",
+								"seat",
+								"@S8"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "2000"
+								},
+								{
+									"key": "cardid",
+									"value": "C0002"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Main api requests",
+			"item": [
+				{
+					"name": "Get all events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-user-token",
+								"value": "dGVzenQuYmVuZWRla0BvdHBtb2JpbC5jb20mMjAwMCZGQURERkVBNTYyRjNDOTE0RENDODE5NTY2ODJEQjBGQw==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/events/all?userid=2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"events",
+								"all"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get event details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-user-token",
+								"value": "dGVzenQuYmVuZWRla0BvdHBtb2JpbC5jb20mMjAwMCZGQURERkVBNTYyRjNDOTE0RENDODE5NTY2ODJEQjBGQw==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/events/5/details?userid=2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"events",
+								"5",
+								"details"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get event details with invalid token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-user-token",
+								"value": "asd123",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/events/5/details?userid=2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"events",
+								"5",
+								"details"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seat reservation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-user-token",
+								"value": "dGVzenQuYmVuZWRla0BvdHBtb2JpbC5jb20mMjAwMCZGQURERkVBNTYyRjNDOTE0RENDODE5NTY2ODJEQjBGQw==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/reservation?eventid=5&seatcode=S8&userid=2000&cardid=C0002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"reservation"
+							],
+							"query": [
+								{
+									"key": "eventid",
+									"value": "5"
+								},
+								{
+									"key": "seatcode",
+									"value": "S8"
+								},
+								{
+									"key": "userid",
+									"value": "2000"
+								},
+								{
+									"key": "cardid",
+									"value": "C0002"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

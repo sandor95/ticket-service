@@ -22,7 +22,7 @@
     <build>
         <resources>
             <resource>
-                <directory>specification</directory>
+                <directory>documentation</directory>
                 <excludes>
                     <exclude>*.docx</exclude>
                 </excludes>
@@ -40,9 +40,9 @@
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <sourceDirectory>specification</sourceDirectory>
+                    <sourceDirectory>documentation</sourceDirectory>
                     <sourceDocumentExtensions>adoc</sourceDocumentExtensions>
-                    <outputDirectory>${targetDocsFolder}/specification</outputDirectory>
+                    <outputDirectory>${targetDocsFolder}/documentation</outputDirectory>
                     <backend>html5</backend>
                     <doctype>docbook</doctype>
                     <preserveDirectories>true</preserveDirectories>
