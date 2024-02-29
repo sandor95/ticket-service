@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class TicketApiClientConfiguration {
 
     @Bean
-    public ApiClient coreApiConfigClient(@Value("${ticket-api.url}") String coreApiUrl,
-                                         @Value("${ticket-api.timeout:60000}") Long timeout) {
+    public ApiClient ticketApiConfigClient(@Value("${ticket-api.url}") String coreApiUrl,
+                                           @Value("${ticket-api.timeout:60000}") Long timeout) {
         return new ApiClient()
                 .setBasePath(coreApiUrl)
                 .setWaitTimeMillis(timeout);

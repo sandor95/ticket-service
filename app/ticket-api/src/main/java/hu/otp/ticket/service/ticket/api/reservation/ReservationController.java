@@ -1,5 +1,6 @@
 package hu.otp.ticket.service.ticket.api.reservation;
 
+import static hu.otp.ticket.service.Const.USER_ID_PARAM;
 import static hu.otp.ticket.service.Const.X_USER_TOKEN;
 import static hu.otp.ticket.service.ticket.api.TicketApiApplication.APP_NAME;
 
@@ -30,8 +31,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 public class ReservationController {
-
-    private static final String USER_ID_PARAM = "userid";
 
     private static final String CARD_ID_PARAM = "cardid";
 

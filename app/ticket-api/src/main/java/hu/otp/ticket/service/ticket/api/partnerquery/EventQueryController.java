@@ -1,5 +1,6 @@
 package hu.otp.ticket.service.ticket.api.partnerquery;
 
+import static hu.otp.ticket.service.Const.USER_ID_PARAM;
 import static hu.otp.ticket.service.Const.X_USER_TOKEN;
 
 import java.util.List;
@@ -25,8 +26,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/partner/event")
 public class EventQueryController {
-
-    private static final String USER_ID_PARAM = "userid";
 
     private final CommonService commonService;
 
