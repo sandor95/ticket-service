@@ -48,9 +48,14 @@ public class ReservationController {
             description = "Reserve a seat for an event",
             parameters = {@Parameter(name = X_USER_TOKEN, in = ParameterIn.HEADER, description = "User token",
                             content = @Content(schema = @Schema(implementation = String.class))),
-                          @Parameter(name = "eventId", in = ParameterIn.PATH, description = "Event ID"),
-                          @Parameter(name = "seatCode", in = ParameterIn.PATH, description = "Seat code at the event"),
-                          @Parameter(name = USER_ID_PARAM, in = ParameterIn.QUERY, description = "Logged user ID")}
+                          @Parameter(name = "eventId", in = ParameterIn.PATH, description = "Event ID",
+                                        content = @Content(schema = @Schema(implementation = Long.class))),
+                          @Parameter(name = "seatCode", in = ParameterIn.PATH, description = "Seat code at the event",
+                                        content = @Content(schema = @Schema(implementation = String.class))),
+                          @Parameter(name = USER_ID_PARAM, in = ParameterIn.QUERY, description = "Logged user ID",
+                                        content = @Content(schema = @Schema(implementation = Long.class))),
+                          @Parameter(name = CARD_ID_PARAM, in = ParameterIn.QUERY, description = "Seat code for the event",
+                                        content = @Content(schema = @Schema(implementation = String.class)))}
     )
     @PostMapping("/reserve/event/@{eventId}/seat/@{seatCode}")
     public ReservationResponseDTO reserve(@RequestHeader Map<String, String> headers,

@@ -19,6 +19,7 @@
         <module>journal</module>
         <module>core-api-client</module>
         <module>partner-api-client</module>
+        <module>ticket-api-client</module>
     </modules>
 
     <dependencies>

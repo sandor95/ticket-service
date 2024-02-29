@@ -1,0 +1,381 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OTP Mobil - Ticket Service TICKET-API definition",
+    "description": "Ticket Service ticket module.",
+    "contact": {
+      "name": "OTP Mobil Kft.",
+      "email": "info@otpmobil.com"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8083",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/reserve/event/@{eventId}/seat/@{seatCode}": {
+      "post": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "Reserve a seat for an event",
+        "operationId": "reserveSeat",
+        "parameters": [
+          {
+            "name": "x-user-token",
+            "in": "header",
+            "description": "User token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Event ID",
+            "required": true,
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          {
+            "name": "seatCode",
+            "in": "path",
+            "description": "Seat code at the event",
+            "required": true,
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "userid",
+            "in": "query",
+            "description": "Logged user ID",
+            "required": true,
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          {
+            "name": "cardid",
+            "in": "query",
+            "description": "Seat code for the event",
+            "required": true,
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Seat reservation was successful",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "HTTP request cannot be processed due validation error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid user",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/partner/event/{id}": {
+      "get": {
+        "tags": [
+          "event-query-controller"
+        ],
+        "description": "Event details from Partner",
+        "operationId": "getEvent",
+        "parameters": [
+          {
+            "name": "x-user-token",
+            "in": "header",
+            "description": "User token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "userid",
+            "in": "query",
+            "description": "Logged user ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the requested event",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDetailsDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid user",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/partner/event/all": {
+      "get": {
+        "tags": [
+          "event-query-controller"
+        ],
+        "description": "All available events from Partner",
+        "operationId": "getAllEvents",
+        "parameters": [
+          {
+            "name": "x-user-token",
+            "in": "header",
+            "description": "User token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "userid",
+            "in": "query",
+            "description": "Logged user ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All event list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventDTO"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid user",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "ReservationResponseDTO": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "seatCode": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errorCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EventDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "seats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeatDTO"
+            }
+          }
+        }
+      },
+      "SeatDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "reserved": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EventDTO": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "startTimeStamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "endTimeStamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}
